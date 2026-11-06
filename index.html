@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mota Painting Services — Florida's Architectural & Luxury Finishes</title>
+  <meta name="description" content="Professional painting, caulking, and waterproofing solutions tailored to commercial buildings, condominium communities, and luxury residential properties across Florida." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="bg-dark text-light antialiased selection:bg-champagne selection:text-black">
+
+  <!-- ==================== 01. HEADER / NAVIGATION ==================== -->
+  <header id="site-header" class="site-header fixed top-0 left-0 w-full z-50 transition-all duration-500">
+    <div class="header-inner max-w-7xl mx-auto px-6 lg:px-12 h-20 sm:h-24 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo-link group flex items-center gap-3 transition-opacity duration-300 hover:opacity-90">
+        <img 
+          src="/assets/images/mota-logo.png" 
+          alt="Mota Painting Services" 
+          class="h-10 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+        />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav hidden md:flex items-center gap-7 lg:gap-9">
+        <a href="#hero" class="nav-link text-[11px] lg:text-xs tracking-[0.16em] uppercase font-medium text-white/80 hover:text-white transition-colors duration-300 relative py-2">
+          <span>Home</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a href="#services" class="nav-link text-[11px] lg:text-xs tracking-[0.16em] uppercase font-medium text-white/80 hover:text-white transition-colors duration-300 relative py-2">
+          <span>Services</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a href="#our-work" class="nav-link text-[11px] lg:text-xs tracking-[0.16em] uppercase font-medium text-white/80 hover:text-white transition-colors duration-300 relative py-2">
+          <span>Our Work</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a href="#about" class="nav-link text-[11px] lg:text-xs tracking-[0.16em] uppercase font-medium text-white/80 hover:text-white transition-colors duration-300 relative py-2">
+          <span>About</span>
+          <span class="nav-indicator"></span>
+        </a>
+        <a href="#contact" class="nav-link text-[11px] lg:text-xs tracking-[0.16em] uppercase font-medium text-white/80 hover:text-white transition-colors duration-300 relative py-2">
+          <span>Contact</span>
+          <span class="nav-indicator"></span>
+        </a>
+      </nav>
+
+      <!-- Desktop CTA Button (Compact, Bold Contrast in Champagne Gold) -->
+      <div class="hidden md:flex items-center">
+        <a 
+          href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-nav-estimate group relative inline-flex items-center gap-2 h-9 px-4 text-[12px] font-bold tracking-[0.08em] uppercase rounded-lg text-[#080c10] bg-champagne hover:bg-champagne-light transition-all duration-300 shadow-[0_2px_12px_rgba(212,175,55,0.35)] hover:shadow-[0_4px_18px_rgba(212,175,55,0.5)] transform hover:-translate-y-0.5"
+        >
+          <span>Free Estimate</span>
+          <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button 
+        id="mobile-menu-toggle"
+        class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+      >
+        <span class="hamburger-bar w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+        <span class="hamburger-bar w-4 h-0.5 bg-champagne transition-all duration-300 ml-auto"></span>
+        <span class="hamburger-bar w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+      </button>
+
+    </div>
+
+    <!-- Mobile Drawer Overlay -->
+    <div id="mobile-menu-drawer" class="mobile-drawer fixed inset-0 bg-[#080c10]/95 backdrop-blur-xl z-40 hidden flex-col justify-between px-8 py-12">
+      <div class="flex justify-between items-center mb-10">
+        <img src="/assets/images/mota-logo.png" alt="Mota Painting Services" class="h-9 w-auto" />
+        <button id="mobile-menu-close" class="text-white/70 hover:text-white p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="flex flex-col gap-6 text-center">
+        <a href="#hero" class="mobile-link text-lg uppercase tracking-[0.18em] font-medium text-white/90 hover:text-champagne transition-colors">Home</a>
+        <a href="#services" class="mobile-link text-lg uppercase tracking-[0.18em] font-medium text-white/90 hover:text-champagne transition-colors">Services</a>
+        <a href="#our-work" class="mobile-link text-lg uppercase tracking-[0.18em] font-medium text-white/90 hover:text-champagne transition-colors">Our Work</a>
+        <a href="#about" class="mobile-link text-lg uppercase tracking-[0.18em] font-medium text-white/90 hover:text-champagne transition-colors">About</a>
+        <a href="#contact" class="mobile-link text-lg uppercase tracking-[0.18em] font-medium text-white/90 hover:text-champagne transition-colors">Contact</a>
+      </nav>
+
+      <div class="pt-8 border-t border-white/10 text-center">
+        <a 
+          href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full h-12 rounded-lg inline-flex items-center justify-center gap-2 text-xs font-semibold tracking-[0.16em] uppercase bg-gradient-to-r from-champagne to-champagne-dark text-black shadow-lg"
+        >
+          <span>Get a Free Estimate</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+        <p class="text-white/40 text-[11px] mt-4 tracking-wider">Serving All South & Central Florida</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 02. HERO SECTION (CINEMATIC SCROLL WITH PIN) ==================== -->
+  <section id="hero" class="hero-scroll-container relative w-full h-screen overflow-hidden">
+    
+    <!-- Video & Canvas Media Background (100% viewport) -->
+    <div class="hero-media-wrapper absolute inset-0 w-full h-full z-0">
+      <video 
+        id="hero-video"
+        class="hero-video absolute inset-0 w-full h-full object-cover"
+        playsinline
+        muted
+        preload="auto"
+        poster="/assets/images/hero-poster.png"
+      >
+        <source src="/video.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <!-- Dark Frosted Glass Overlay (Left Side Cinematic Glassmorphism) -->
+    <div class="hero-glass-overlay absolute inset-0 pointer-events-none z-10"></div>
+
+    <!-- Soft Ambient Left Vignette for Flawless Readability -->
+    <div class="hero-subtle-vignette absolute inset-0 pointer-events-none z-10"></div>
+
+    <!-- Hero Content (Left Aligned on top of dark glass) -->
+    <div class="hero-content-wrapper relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 flex flex-col justify-center">
+      
+      <div class="hero-content-box max-w-[540px]">
+        
+        <!-- Eyebrow -->
+        <div class="hero-eyebrow flex items-center gap-3 mb-5">
+          <span class="w-6 h-[1.5px] bg-champagne"></span>
+          <span class="text-champagne font-mono text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold">
+            PREMIUM PAINTING SERVICES
+          </span>
+        </div>
+
+        <!-- Headline (Manrope, Weight 600, Compact & Refined) -->
+        <h1 class="hero-headline font-manrope font-semibold text-[34px] sm:text-[42px] lg:text-[52px] leading-[1.12] text-white tracking-[-0.035em] mb-6">
+          A Flawless Finish<br />
+          <span>That </span><span class="text-champagne">Transforms.</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="hero-subheadline font-manrope text-[15px] sm:text-[16px] lg:text-[17px] text-white/85 font-normal leading-[1.6] max-w-[480px] mb-8">
+          Professional painting solutions that restore, protect, and elevate residential and commercial properties across Florida.
+        </p>
+
+        <!-- Compact Action Buttons with high-contrast Champagne Gold -->
+        <div class="hero-cta-group flex flex-wrap items-center gap-3.5 sm:gap-4">
+          <!-- Primary Button -->
+          <a 
+            href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary-hero group inline-flex items-center gap-2 h-11 px-5 rounded-lg text-[13px] font-bold tracking-[0.04em] uppercase text-[#080c10] bg-champagne hover:bg-champagne-light transition-all duration-300 shadow-[0_4px_18px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_24px_rgba(212,175,55,0.6)] transform hover:-translate-y-0.5"
+          >
+            <span>Free Estimate</span>
+            <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+
+          <!-- Secondary Button -->
+          <a 
+            href="#services"
+            class="btn-secondary-hero group inline-flex items-center gap-2 h-11 px-5 rounded-lg text-[13px] font-medium text-white/95 border border-white/25 hover:border-white/70 bg-black/40 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
+          >
+            <span>View Our Work</span>
+            <svg class="w-4 h-4 opacity-75 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Scroll Indicator (Bottom Center, Clean & Disconnected from Content) -->
+    <div id="hero-scroll-indicator" class="hero-scroll-indicator absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none transition-opacity duration-500">
+      <span class="text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-medium text-white/70">
+        SCROLL TO TRANSFORM
+      </span>
+      <div class="mouse-scroll-icon w-4 h-7 border border-white/35 rounded-full flex justify-center pt-1">
+        <span class="scroll-wheel w-1 h-1.5 bg-champagne rounded-full animate-wheel-scroll"></span>
+      </div>
+    </div>
+
+    <!-- Discreet Scrubber Progress Bar -->
+    <div class="absolute bottom-0 left-0 w-full h-[2px] bg-white/10 z-30">
+      <div id="transformation-progress-bar" class="h-full bg-gradient-to-r from-champagne to-champagne-light w-0"></div>
+    </div>
+
+  </section>
+
+
+  <!-- ==================== 03. OUR SERVICES SECTION ==================== -->
+  <section id="services" class="services-section relative z-30 bg-[#fbfbfa] text-[#16181b] py-28 sm:py-36 px-6 lg:px-12 border-t border-[#e8e6e1]">
+    
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="services-header max-w-3xl mb-20 lg:mb-28">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="w-6 h-[1.5px] bg-[#b89547]"></span>
+          <span class="text-xs uppercase tracking-[0.25em] font-semibold text-[#8e7436] font-mono">
+            WHAT WE DO
+          </span>
+        </div>
+        <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.12] text-[#16181b] tracking-tight mb-6">
+          Professional Painting.<br />
+          <span class="italic font-normal text-[#8e7436]">Lasting Impressions.</span>
+        </h2>
+        <p class="font-sans text-base sm:text-lg text-[#555a64] font-light leading-relaxed max-w-2xl">
+          From commercial buildings and condominium communities to residential properties, we provide painting, caulking, and waterproofing solutions tailored to each project's needs.
+        </p>
+      </div>
+
+      <!-- 3 Primary Featured Services (Architectural Asymmetric Grid) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 mb-16">
+        
+        <!-- Primary 01: Commercial Painting (Large Spotlight Card) -->
+        <div class="lg:col-span-7 service-primary-card group relative bg-white rounded-2xl overflow-hidden border border-[#eae8e3] shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col justify-between">
+          <div class="card-media-wrapper relative h-80 sm:h-96 w-full overflow-hidden bg-[#20242c]">
+            <!-- Architectural photograph representation -->
+            <img 
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop" 
+              alt="Commercial Painting"
+              class="w-full h-full object-cover transform duration-700 ease-out group-hover:scale-105 filter brightness-[0.92]" 
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute top-6 left-6 flex items-center gap-2">
+              <span class="px-3.5 py-1 rounded-full text-[11px] font-mono font-semibold tracking-wider uppercase bg-white/90 text-[#16181b] backdrop-blur-sm">
+                01 — Commercial
+              </span>
+            </div>
+            <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
+              <span class="text-xs uppercase tracking-[0.2em] text-champagne-light font-mono font-medium">Exterior & Interior Finishes</span>
+              <div class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center bg-white/10 backdrop-blur-sm group-hover:bg-champagne group-hover:text-black group-hover:border-champagne transition-all duration-300">
+                <svg class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-8 sm:p-10 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-2xl sm:text-3xl text-[#16181b] font-normal mb-3 group-hover:text-[#8e7436] transition-colors duration-300">
+                Commercial Painting
+              </h3>
+              <p class="font-sans text-sm sm:text-base text-[#5c616c] leading-relaxed">
+                Professional painting solutions for commercial buildings and business properties, with careful surface preparation and quality finishes.
+              </p>
+            </div>
+            <div class="pt-6 mt-6 border-t border-[#f0eee9] flex items-center justify-between text-xs text-[#8e7436] font-semibold tracking-wider uppercase">
+              <span>Tailored for business facilities</span>
+              <a href="https://wa.me/19548560488?text=Commercial%20Painting%20Inquiry" class="inline-flex items-center gap-1.5 hover:underline">
+                Request Proposal &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column (Cards 02 & 03) -->
+        <div class="lg:col-span-5 flex flex-col gap-8 lg:gap-10">
+          
+          <!-- Primary 02: Condominium & Building Painting -->
+          <div class="service-primary-card group bg-white rounded-2xl overflow-hidden border border-[#eae8e3] shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col">
+            <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-[#20242c]">
+              <img 
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000&auto=format&fit=crop" 
+                alt="Condominium & Building Painting"
+                class="w-full h-full object-cover transform duration-700 ease-out group-hover:scale-105 filter brightness-[0.92]" 
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full text-[10px] font-mono font-semibold tracking-wider uppercase bg-white/90 text-[#16181b] backdrop-blur-sm">
+                  02 — Condominiums
+                </span>
+              </div>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl text-[#16181b] font-normal mb-2 group-hover:text-[#8e7436] transition-colors duration-300">
+                  Condominium & Building Painting
+                </h3>
+                <p class="font-sans text-xs sm:text-sm text-[#5c616c] leading-relaxed">
+                  Exterior painting solutions for condominium communities, multi-unit properties, and building facades.
+                </p>
+              </div>
+              <div class="pt-4 mt-4 border-t border-[#f0eee9] flex items-center justify-between text-xs text-[#8e7436] font-medium tracking-wide">
+                <span>HOAs & Property Managers</span>
+                <span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary 03: Residential Painting -->
+          <div class="service-primary-card group bg-white rounded-2xl overflow-hidden border border-[#eae8e3] shadow-[0_10px_40px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 flex flex-col">
+            <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-[#20242c]">
+              <img 
+                src="/assets/images/hero-after.png" 
+                alt="Residential Painting"
+                class="w-full h-full object-cover transform duration-700 ease-out group-hover:scale-105 filter brightness-[0.95]" 
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div class="absolute top-4 left-4">
+                <span class="px-3 py-1 rounded-full text-[10px] font-mono font-semibold tracking-wider uppercase bg-white/90 text-[#16181b] backdrop-blur-sm">
+                  03 — Residential
+                </span>
+              </div>
+            </div>
+            <div class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-xl sm:text-2xl text-[#16181b] font-normal mb-2 group-hover:text-[#8e7436] transition-colors duration-300">
+                  Residential Painting
+                </h3>
+                <p class="font-sans text-xs sm:text-sm text-[#5c616c] leading-relaxed">
+                  Interior and exterior painting services designed to refresh, protect, and enhance residential properties.
+                </p>
+              </div>
+              <div class="pt-4 mt-4 border-t border-[#f0eee9] flex items-center justify-between text-xs text-[#8e7436] font-medium tracking-wide">
+                <span>Luxury Homes & Estates</span>
+                <span class="transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Secondary Services Grid (04, 05, 06, 07) -->
+      <div class="pt-10 border-t border-[#e8e6e1]">
+        <div class="flex items-center justify-between mb-8">
+          <h3 class="text-xs uppercase tracking-[0.25em] font-semibold text-[#8e7436] font-mono">
+            SPECIALIZED PROTECTION & ARCHITECTURAL CARE
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- 04 Waterproofing -->
+          <div class="service-secondary-card group bg-white p-7 rounded-xl border border-[#eae8e3] hover:border-[#b89547]/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-semibold text-[#8e7436] tracking-widest">04</span>
+                <div class="w-8 h-8 rounded-full bg-[#f6f5f1] flex items-center justify-center text-[#8e7436] group-hover:bg-[#b89547] group-hover:text-white transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-serif text-lg text-[#16181b] font-normal mb-2 group-hover:text-[#8e7436] transition-colors">
+                Waterproofing
+              </h4>
+              <p class="font-sans text-xs text-[#5c616c] leading-relaxed">
+                Protective solutions to help address moisture exposure and water intrusion across exterior surfaces.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#f4f2ee] flex items-center text-[11px] font-medium text-[#8e7436]">
+              <span>Learn more</span>
+              <span class="ml-1 transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- 05 Caulking & Sealing -->
+          <div class="service-secondary-card group bg-white p-7 rounded-xl border border-[#eae8e3] hover:border-[#b89547]/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-semibold text-[#8e7436] tracking-widest">05</span>
+                <div class="w-8 h-8 rounded-full bg-[#f6f5f1] flex items-center justify-center text-[#8e7436] group-hover:bg-[#b89547] group-hover:text-white transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-serif text-lg text-[#16181b] font-normal mb-2 group-hover:text-[#8e7436] transition-colors">
+                Caulking & Sealing
+              </h4>
+              <p class="font-sans text-xs text-[#5c616c] leading-relaxed">
+                Sealing joints, perimeters, and architectural gaps to support durable exterior finishes and weather resistance.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#f4f2ee] flex items-center text-[11px] font-medium text-[#8e7436]">
+              <span>Learn more</span>
+              <span class="ml-1 transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- 06 Railing Painting -->
+          <div class="service-secondary-card group bg-white p-7 rounded-xl border border-[#eae8e3] hover:border-[#b89547]/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-semibold text-[#8e7436] tracking-widest">06</span>
+                <div class="w-8 h-8 rounded-full bg-[#f6f5f1] flex items-center justify-center text-[#8e7436] group-hover:bg-[#b89547] group-hover:text-white transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-serif text-lg text-[#16181b] font-normal mb-2 group-hover:text-[#8e7436] transition-colors">
+                Railing Painting
+              </h4>
+              <p class="font-sans text-xs text-[#5c616c] leading-relaxed">
+                Painting and refinishing for balcony railings, stairwells, and architectural metalwork prone to coastal exposure.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#f4f2ee] flex items-center text-[11px] font-medium text-[#8e7436]">
+              <span>Learn more</span>
+              <span class="ml-1 transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+          <!-- 07 Roof Painting -->
+          <div class="service-secondary-card group bg-white p-7 rounded-xl border border-[#eae8e3] hover:border-[#b89547]/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-mono font-semibold text-[#8e7436] tracking-widest">07</span>
+                <div class="w-8 h-8 rounded-full bg-[#f6f5f1] flex items-center justify-center text-[#8e7436] group-hover:bg-[#b89547] group-hover:text-white transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                  </svg>
+                </div>
+              </div>
+              <h4 class="font-serif text-lg text-[#16181b] font-normal mb-2 group-hover:text-[#8e7436] transition-colors">
+                Roof Painting
+              </h4>
+              <p class="font-sans text-xs text-[#5c616c] leading-relaxed">
+                Roof painting and thermal protective coating services for suitable tile, metal, and commercial roof requirements.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#f4f2ee] flex items-center text-[11px] font-medium text-[#8e7436]">
+              <span>Learn more</span>
+              <span class="ml-1 transform group-hover:translate-x-1 transition-transform">&rarr;</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Application Entry Scripts -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

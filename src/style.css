@@ -1,0 +1,367 @@
+@import "tailwindcss";
+
+@theme {
+  --color-champagne-light: #f3e5ab;
+  --color-champagne: #d4af37;
+  --color-champagne-dark: #b89547;
+  --color-dark: #080c10;
+  --color-dark-charcoal: #11161d;
+  --color-dark-surface: #181f28;
+
+  --font-manrope: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --color-gold-champagne: #d4af37;
+  --color-gold-light: #f3e5ab;
+  --color-gold-muted: #b89547;
+  --color-dark-bg: #080c10;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-dark-bg);
+  color: #f3f4f6;
+  font-family: var(--font-manrope);
+  overflow-x: hidden;
+  scrollbar-color: #d4af37 #080c10;
+  scrollbar-width: thin;
+}
+
+/* Custom Luxury Scrollbar Styling (WebKit & Chromium) */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080c10;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f3e5ab 0%, #d4af37 50%, #b89547 100%);
+  border-radius: 9999px;
+  border: 2px solid #080c10;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f3e5ab 40%, #d4af37 100%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Typography Helpers */
+.font-manrope {
+  font-family: "Manrope", sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.text-champagne {
+  color: var(--color-gold-champagne);
+}
+
+.text-champagne-light {
+  color: var(--color-gold-light);
+}
+
+/* Header Styles — Always clean & transparent */
+.site-header {
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.site-header.header-scrolled {
+  background: transparent;
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-gold-champagne);
+  transition: width 0.3s ease, left 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover .nav-indicator {
+  width: 100%;
+}
+
+/* ==========================================================================
+   HERO CINEMATIC DARK FROSTED GLASS & VIDEO RATIO
+   ========================================================================== */
+.hero-scroll-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: var(--color-dark-bg);
+  overflow: hidden;
+}
+
+.hero-media-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Exact native resolution & aspect ratio rendering: 1926 x 1076 (no zoom / no crop) */
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center right;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Modern Dark Frosted Glass Layer */
+.hero-glass-overlay {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 60%;
+  pointer-events: none;
+  z-index: 10;
+
+  background: linear-gradient(
+    90deg,
+    rgba(8, 12, 16, 0.84) 0%,
+    rgba(10, 15, 20, 0.70) 40%,
+    rgba(14, 18, 24, 0.32) 74%,
+    transparent 100%
+  );
+
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    black 0%,
+    black 50%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    black 0%,
+    black 50%,
+    transparent 100%
+  );
+}
+
+.hero-subtle-vignette {
+  background: linear-gradient(
+    90deg,
+    rgba(6, 9, 13, 0.5) 0%,
+    rgba(6, 9, 13, 0.15) 35%,
+    transparent 65%
+  );
+  z-index: 10;
+}
+
+/* ==========================================================================
+   MOBILE HERO COMPOSITION (Strictly faithful to reference)
+   Top 55-60%: House Transformation Video
+   Bottom 40-45%: Seamless Gradient into Dark Graphite Content Area
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero-scroll-container {
+    height: 100svh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: #080c10;
+  }
+
+  /* Video strictly in the upper 58% of mobile viewport */
+  .hero-media-wrapper {
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: 60%;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+
+  /* Vertical seamless fade from clear house into dark graphite */
+  .hero-glass-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 12, 16, 0.25) 0%,
+      rgba(8, 12, 16, 0.05) 20%,
+      rgba(8, 12, 16, 0.15) 42%,
+      rgba(8, 12, 16, 0.75) 54%,
+      rgba(8, 12, 16, 0.98) 64%,
+      #080c10 100%
+    );
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .hero-subtle-vignette {
+    display: none;
+  }
+
+  /* Content anchored neatly at the bottom below the house */
+  .hero-content-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: auto;
+    padding-top: 0;
+    padding-bottom: clamp(60px, 8vh, 72px);
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: auto;
+  }
+
+  .hero-content-box {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .hero-headline {
+    font-size: clamp(30px, 8.2vw, 38px);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    margin-bottom: 14px;
+  }
+
+  .hero-subheadline {
+    font-size: clamp(14px, 3.8vw, 15px);
+    line-height: 1.55;
+    margin-bottom: 22px;
+    max-width: 100%;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* Full-width stacked buttons */
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .btn-primary-hero,
+  .btn-secondary-hero {
+    width: 100%;
+    height: 48px;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  /* Scroll Indicator nicely centered at bottom */
+  .hero-scroll-indicator {
+    bottom: clamp(14px, 2.5vh, 20px);
+    gap: 6px;
+  }
+
+  .hero-scroll-indicator span {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+/* Mouse Scroll Animation */
+@keyframes wheelScroll {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-wheel-scroll {
+  animation: wheelScroll 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Mobile Menu Transitions */
+.mobile-drawer.active {
+  display: flex !important;
+  animation: fadeInDrawer 0.3s ease forwards;
+}
+
+@keyframes fadeInDrawer {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Services Cards */
+.service-primary-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.service-primary-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(184, 149, 71, 0.35);
+}
+
+.service-secondary-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.service-secondary-card:hover {
+  transform: translateY(-4px);
+}
