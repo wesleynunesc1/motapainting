@@ -81,9 +81,23 @@ class MotaExperience {
 
     const startTime = 1.0; // Start playback at 1 second
 
-    this.video.pause();
     this.video.muted = true;
-    this.video.currentTime = startTime;
+    this.video.playsInline = true;
+    
+    // Play briefly then pause at 1.0s to ensure mobile iOS / Android WebKit primes the frame buffer
+    const primeVideo = () => {
+      this.video.currentTime = startTime;
+      const playPromise = this.video.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          this.video.pause();
+          this.video.currentTime = startTime;
+        }).catch(() => {
+          this.video.currentTime = startTime;
+        });
+      }
+    };
+    primeVideo();
 
     const setupScrubber = () => {
       const duration = this.video.duration || 6.04;
@@ -114,16 +128,20 @@ class MotaExperience {
             this.progressBar.style.width = `${self.progress * 100}%`;
           }
 
-          // Fade out scroll indicator quickly upon scroll start
-          if (this.scrollIndicator) {
-            if (self.progress > 0.03) {
-              this.scrollIndicator.style.opacity = '0';
-              this.scrollIndicator.style.pointerEvents = 'none';
-            } else {
-              this.scrollIndicator.style.opacity = '1';
-              this.scrollIndicator.style.pointerEvents = 'auto';
+          // Fade out scroll indicators quickly upon scroll start
+          const desktopInd = document.getElementById('hero-scroll-indicator');
+          const mobileInd = document.querySelector('.mobile-scroll-indicator');
+          [desktopInd, mobileInd].forEach(ind => {
+            if (ind) {
+              if (self.progress > 0.03) {
+                ind.style.opacity = '0';
+                ind.style.pointerEvents = 'none';
+              } else {
+                ind.style.opacity = ind === mobileInd ? '0.7' : '1';
+                ind.style.pointerEvents = 'auto';
+              }
             }
-          }
+          });
 
           // Start smooth interpolation render loop
           if (!this.isRendering) {
