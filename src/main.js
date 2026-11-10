@@ -30,21 +30,62 @@ class MotaExperience {
   }
 
   /**
-   * Transparent header with smart backdrop transition when scrolling past hero
+   * Transparent header on Hero.
+   * Only activates Dark Glass background when the user reaches the white/light section (#services).
+   * Updates active state of nav links based on scroll position.
    */
   initHeaderBehavior() {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 50) {
-        this.header.classList.add('header-scrolled');
+    const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
+    const sections = ['hero', 'services', 'our-work', 'about', 'contact'];
+    const servicesSection = document.getElementById('services');
+
+    const updateHeader = () => {
+      // Check if services section has reached the header
+      if (servicesSection) {
+        const servicesRect = servicesSection.getBoundingClientRect();
+        // Trigger precisely when the top of the white section enters or passes under the header (~80px)
+        if (servicesRect.top <= 80) {
+          this.header.classList.add('header-scrolled');
+        } else {
+          this.header.classList.remove('header-scrolled');
+        }
       } else {
-        this.header.classList.remove('header-scrolled');
+        if (window.scrollY > 400) {
+          this.header.classList.add('header-scrolled');
+        } else {
+          this.header.classList.remove('header-scrolled');
+        }
       }
-    }, { passive: true });
+
+      // Dynamic Active Navigation Link Tracker
+      let currentSection = 'hero';
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 140 && rect.bottom >= 140) {
+            currentSection = sectionId;
+            break;
+          }
+        }
+      }
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentSection}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader(); // initial check
   }
 
   /**
-   * Mobile responsive drawer navigation
+   * Mobile responsive drawer navigation with Escape key & click-outside support
    */
   initMobileMenu() {
     const toggleBtn = document.getElementById('mobile-menu-toggle');
@@ -69,6 +110,13 @@ class MotaExperience {
     if (toggleBtn) toggleBtn.addEventListener('click', openMenu);
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
     links.forEach(l => l.addEventListener('click', closeMenu));
+
+    // Close on Escape key press
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('active')) {
+        closeMenu();
+      }
+    });
   }
 
   /**

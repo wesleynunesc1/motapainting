@@ -79,19 +79,30 @@ body {
   color: var(--color-gold-light);
 }
 
-/* Header Styles — Always clean & transparent */
+/* Header Styles — Completely transparent on Hero, Dark Glass when reaching light sections */
 .site-header {
   background: transparent;
-  transition: all 0.3s ease;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .site-header.header-scrolled {
-  background: transparent;
+  background: rgba(10, 14, 19, 0.90);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 8px 32px -4px rgba(0, 0, 0, 0.55);
 }
 
 .nav-link {
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
 .nav-indicator {
@@ -99,14 +110,20 @@ body {
   bottom: 0;
   left: 50%;
   width: 0;
-  height: 1.5px;
-  background: var(--color-gold-champagne);
-  transition: width 0.3s ease, left 0.3s ease;
+  height: 2px;
+  background: var(--color-champagne);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateX(-50%);
+  border-radius: 9999px;
 }
 
-.nav-link:hover .nav-indicator {
+.nav-link:hover .nav-indicator,
+.nav-link.active .nav-indicator {
   width: 100%;
+}
+
+.nav-link.active {
+  color: var(--color-champagne) !important;
 }
 
 /* ==========================================================================
