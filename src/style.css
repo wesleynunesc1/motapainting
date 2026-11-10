@@ -364,39 +364,29 @@ body {
   animation: wheelScroll 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Mobile Menu Transitions & Architectural Glassmorphism (Solid dark frosted backdrop) */
+/* Mobile Menu Transitions & Architectural Glassmorphism */
 .mobile-drawer {
-  background: rgba(10, 14, 20, 0.96) !important;
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  background-color: #0b0f15 !important;
+  background: radial-gradient(circle at 50% 0%, #151c27 0%, #0a0e14 100%) !important;
   border-left: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@supports not (backdrop-filter: blur(32px)) {
-  .mobile-drawer {
-    background: #0a0e14 !important;
-  }
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-drawer.active {
   display: flex !important;
-  animation: fadeInDrawer 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeInDrawer {
   from {
     opacity: 0;
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
-    transform: scale(0.98) translateY(-6px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    transform: scale(1) translateY(0);
+    transform: translateY(0);
   }
 }
 
