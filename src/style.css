@@ -3,6 +3,7 @@
 @theme {
   --color-champagne-light: #f3e5ab;
   --color-champagne: #d4af37;
+  --color-champagne-gold: #dfa938;
   --color-champagne-dark: #b89547;
   --color-dark: #080c10;
   --color-dark-charcoal: #11161d;
@@ -15,6 +16,7 @@
 
 :root {
   --color-gold-champagne: #d4af37;
+  --color-gold-primary: #dfa938;
   --color-gold-light: #f3e5ab;
   --color-gold-muted: #b89547;
   --color-dark-bg: #080c10;
@@ -75,8 +77,19 @@ body {
   color: var(--color-gold-champagne);
 }
 
-.text-champagne-light {
-  color: var(--color-gold-light);
+/* CTA Gold Button — Vibrant, warm champagne gold with subtle satin gradient */
+.btn-cta-gold {
+  background: linear-gradient(135deg, #e5b342 0%, #d89f2e 100%);
+  color: #11161d;
+  box-shadow: 0 4px 18px rgba(216, 159, 46, 0.32);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-cta-gold:hover {
+  background: linear-gradient(135deg, #f0c359 0%, #dfa938 100%);
+  color: #080c10;
+  box-shadow: 0 6px 24px rgba(216, 159, 46, 0.48);
+  transform: translateY(-1px);
 }
 
 /* Header Styles — Completely transparent on Hero, Dark Glass when reaching light sections */

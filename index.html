@@ -50,14 +50,23 @@
         </a>
       </nav>
 
-      <!-- Desktop CTA Button (FREE ESTIMATE →, Champagne Gold, Dark text, 44-48px height) -->
+      <!-- Desktop CTA Button (FREE ESTIMATE →, Champagne Gold with Paint Roller Icon) -->
       <div class="hidden md:flex items-center">
         <a 
           href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
           target="_blank"
           rel="noopener noreferrer"
-          class="group relative inline-flex items-center gap-2.5 h-[44px] lg:h-[46px] px-6 text-[13px] font-manrope font-bold tracking-[0.08em] uppercase rounded-full text-[#11161d] bg-champagne-gold hover:bg-[#d8b56f] transition-all duration-300 shadow-[0_2px_14px_rgba(200,169,110,0.25)] hover:shadow-[0_4px_20px_rgba(200,169,110,0.4)]"
+          class="btn-cta-gold group relative inline-flex items-center gap-2.5 h-[46px] lg:h-[48px] px-6 text-[13px] font-manrope font-bold tracking-[0.08em] uppercase rounded-full"
         >
+          <!-- Paint Roller Icon -->
+          <svg class="w-4 h-4 flex-shrink-0 text-[#11161d] transform transition-transform duration-300 group-hover:-rotate-12" viewBox="0 0 128 128" fill="none">
+            <g fill="currentColor">
+              <rect x="10" y="8" width="98" height="36" rx="9"/>
+              <rect x="3" y="19" width="10" height="14" rx="5"/>
+              <path d="M54 94h19c3 0 5 2 5 5 0 2-1 4-3 5l-2 14c-1 5-4 7-9 7h-2c-5 0-8-2-9-7l-2-14c-2-1-3-3-3-5 0-3 3-5 6-5Z"/>
+            </g>
+            <path d="M108 28h4c7 0 11 4 11 11v23c0 8-5 13-13 13H76c-9 0-14 5-14 14v5" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <span>Free Estimate</span>
           <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -65,16 +74,16 @@
         </a>
       </div>
 
-      <!-- Mobile Hamburger Button -->
+      <!-- Mobile Hamburger Button (Three-bar minimal style with golden center accent line) -->
       <button 
         id="mobile-menu-toggle"
-        class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg bg-white/5 border border-white/10 gap-1.5 focus:outline-none"
+        class="mobile-menu-btn md:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5 focus:outline-none"
         aria-label="Toggle Navigation Menu"
         aria-expanded="false"
       >
-        <span class="hamburger-bar w-5 h-0.5 bg-white transition-all duration-300 origin-center"></span>
-        <span class="hamburger-bar w-5 h-0.5 bg-champagne-gold transition-all duration-300"></span>
-        <span class="hamburger-bar w-5 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+        <span class="hamburger-bar w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+        <span class="hamburger-bar w-4 h-0.5 bg-[#dfa938] transition-all duration-300 ml-auto"></span>
+        <span class="hamburger-bar w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
       </button>
 
     </div>
@@ -103,8 +112,16 @@
           href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full h-[50px] rounded-full inline-flex items-center justify-center gap-2 text-[13px] font-manrope font-bold tracking-[0.1em] uppercase bg-champagne-gold hover:bg-[#d8b56f] text-[#11161d] shadow-lg transition-colors"
+          class="btn-cta-gold w-full h-[52px] rounded-full inline-flex items-center justify-center gap-2.5 text-[13px] font-manrope font-bold tracking-[0.1em] uppercase shadow-lg"
         >
+          <svg class="w-4 h-4 flex-shrink-0 text-[#11161d]" viewBox="0 0 128 128" fill="none">
+            <g fill="currentColor">
+              <rect x="10" y="8" width="98" height="36" rx="9"/>
+              <rect x="3" y="19" width="10" height="14" rx="5"/>
+              <path d="M54 94h19c3 0 5 2 5 5 0 2-1 4-3 5l-2 14c-1 5-4 7-9 7h-2c-5 0-8-2-9-7l-2-14c-2-1-3-3-3-5 0-3 3-5 6-5Z"/>
+            </g>
+            <path d="M108 28h4c7 0 11 4 11 11v23c0 8-5 13-13 13H76c-9 0-14 5-14 14v5" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <span>Free Estimate</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -173,8 +190,16 @@
               href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
               target="_blank"
               rel="noopener noreferrer"
-              class="btn-primary-hero group inline-flex items-center gap-2 h-11 px-5 rounded-lg text-[13px] font-bold tracking-[0.04em] uppercase text-[#080c10] bg-champagne hover:bg-champagne-light transition-all duration-300 shadow-[0_4px_18px_rgba(212,175,55,0.4)] hover:shadow-[0_6px_24px_rgba(212,175,55,0.6)] transform hover:-translate-y-0.5"
+              class="btn-cta-gold group inline-flex items-center gap-2.5 h-12 px-6 rounded-full text-[13px] font-bold tracking-[0.06em] uppercase"
             >
+              <svg class="w-4 h-4 flex-shrink-0 text-[#11161d]" viewBox="0 0 128 128" fill="none">
+                <g fill="currentColor">
+                  <rect x="10" y="8" width="98" height="36" rx="9"/>
+                  <rect x="3" y="19" width="10" height="14" rx="5"/>
+                  <path d="M54 94h19c3 0 5 2 5 5 0 2-1 4-3 5l-2 14c-1 5-4 7-9 7h-2c-5 0-8-2-9-7l-2-14c-2-1-3-3-3-5 0-3 3-5 6-5Z"/>
+                </g>
+                <path d="M108 28h4c7 0 11 4 11 11v23c0 8-5 13-13 13H76c-9 0-14 5-14 14v5" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
               <span>Free Estimate</span>
               <svg class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -184,7 +209,7 @@
             <!-- Secondary Button -->
             <a 
               href="#services"
-              class="btn-secondary-hero group inline-flex items-center gap-2 h-11 px-5 rounded-lg text-[13px] font-medium text-white/95 border border-white/25 hover:border-white/70 bg-black/40 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
+              class="btn-secondary-hero group inline-flex items-center gap-2 h-12 px-6 rounded-full text-[13px] font-medium text-white/95 border border-white/25 hover:border-white/70 bg-black/40 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
             >
               <span>View Our Work</span>
               <svg class="w-4 h-4 opacity-75 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,15 +257,15 @@
       <!-- Section Header: Left Eyebrow & Headline, Right Intro Paragraph (Editorial Layout) -->
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 mb-10 sm:mb-14">
         <div class="max-w-2xl">
-          <div class="flex items-center gap-2.5 mb-3 sm:mb-4">
-            <span class="w-6 h-[2px] bg-champagne-gold"></span>
-            <span class="font-manrope text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase text-champagne-dark">
+          <div class="flex items-center gap-3 mb-3.5 sm:mb-4">
+            <span class="w-8 h-[2.5px] bg-[#dfa938] rounded-full"></span>
+            <span class="font-manrope text-[12px] sm:text-[13px] font-bold tracking-[0.22em] uppercase text-[#b88628]">
               OUR SERVICES
             </span>
           </div>
           <h2 class="font-manrope font-extrabold text-[32px] sm:text-[44px] lg:text-[48px] leading-[1.12] text-[#11161d] tracking-[-0.035em]">
             Professional Painting.<br />
-            <span class="text-champagne-dark">Lasting Impressions.</span>
+            <span class="text-[#b88628]">Lasting Impressions.</span>
           </h2>
         </div>
         <div class="max-w-md lg:pb-1">
@@ -487,16 +512,16 @@
 
       </div>
 
-      <!-- Section Final CTA Button (Full width on mobile ~50px height, centered on desktop) -->
+      <!-- Section Final CTA Button (Full width on mobile ~52px height, centered on desktop) -->
       <div class="text-center">
         <a 
           href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%2C%20I%20would%20like%20to%20explore%20your%20services%20and%20request%20an%20estimate."
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto h-[50px] px-10 rounded-full bg-champagne-gold hover:bg-[#d8b56f] text-[#11161d] font-manrope font-bold text-[14px] uppercase tracking-[0.06em] shadow-[0_4px_18px_rgba(200,169,110,0.25)] hover:shadow-[0_6px_24px_rgba(200,169,110,0.4)] transition-all duration-300 group"
+          class="btn-cta-gold inline-flex items-center justify-center gap-3 w-full sm:w-auto h-[52px] px-10 rounded-full font-manrope font-bold text-[14px] uppercase tracking-[0.08em] group"
         >
           <span>Explore Our Services</span>
-          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>
         </a>
