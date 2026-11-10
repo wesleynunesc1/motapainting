@@ -364,25 +364,28 @@ body {
   animation: wheelScroll 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Mobile Menu Transitions & Architectural Glassmorphism */
+/* Mobile Menu Transitions & Solid Architectural Panel */
 .mobile-drawer {
-  background-color: #0b0f15 !important;
-  background: radial-gradient(circle at 50% 0%, #151c27 0%, #0a0e14 100%) !important;
+  background-color: #080c10 !important;
+  background: #080c10 !important;
+  opacity: 1 !important;
   border-left: 1px solid rgba(212, 175, 55, 0.2);
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.95);
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
   -webkit-overflow-scrolling: touch;
 }
 
 .mobile-drawer.active {
   display: flex !important;
-  animation: fadeInDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: fadeInDrawer 0.25s ease forwards;
 }
 
 @keyframes fadeInDrawer {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
