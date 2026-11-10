@@ -71,7 +71,19 @@ class MotaExperience {
         }
       }
 
+      // Sync Desktop Links
       navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentSection}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Sync Mobile Floating Menu Links
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      mobileNavLinks.forEach(link => {
         const href = link.getAttribute('href');
         if (href === `#${currentSection}`) {
           link.classList.add('active');
@@ -86,13 +98,14 @@ class MotaExperience {
   }
 
   /**
-   * Mobile responsive drawer navigation with Escape key & click-outside support
+   * Mobile responsive floating Dark Glass drawer navigation with Escape key & click-outside support
    */
   initMobileMenu() {
     const toggleBtn = document.getElementById('mobile-menu-toggle');
     const closeBtn = document.getElementById('mobile-menu-close');
     const drawer = document.getElementById('mobile-menu-drawer');
-    const links = document.querySelectorAll('.mobile-link');
+    const card = document.getElementById('mobile-menu-card');
+    const links = document.querySelectorAll('.mobile-nav-link');
 
     const openMenu = () => {
       drawer.classList.remove('hidden');
@@ -106,11 +119,21 @@ class MotaExperience {
       drawer.classList.add('hidden');
       document.body.style.overflow = '';
       toggleBtn.setAttribute('aria-expanded', 'false');
+      if (toggleBtn) toggleBtn.focus();
     };
 
     if (toggleBtn) toggleBtn.addEventListener('click', openMenu);
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
     links.forEach(l => l.addEventListener('click', closeMenu));
+
+    // Close when clicking outside the floating card (backdrop click)
+    if (drawer) {
+      drawer.addEventListener('click', (e) => {
+        if (card && !card.contains(e.target) && !toggleBtn.contains(e.target)) {
+          closeMenu();
+        }
+      });
+    }
 
     // Close on Escape key press
     document.addEventListener('keydown', (e) => {
