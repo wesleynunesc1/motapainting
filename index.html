@@ -89,24 +89,30 @@
     </div>
 
     <!-- Mobile Drawer Overlay (Dark Glass Panel, Accessible, Escape key close) -->
-    <div id="mobile-menu-drawer" class="mobile-drawer fixed inset-0 bg-[#0a0e13]/95 backdrop-blur-2xl z-50 hidden flex-col justify-between px-7 py-9">
-      <div class="flex justify-between items-center pb-6 border-b border-white/10">
-        <img src="/assets/images/mota-logo.png" alt="Mota Painting Services" class="h-10 w-auto" />
-        <button id="mobile-menu-close" class="text-white/70 hover:text-white p-2.5 rounded-lg bg-white/5 border border-white/10" aria-label="Close menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    <div id="mobile-menu-drawer" class="mobile-drawer fixed inset-0 z-50 hidden flex-col justify-between px-6 py-8 sm:px-8 sm:py-10">
+      
+      <!-- Top Bar: Logo & Close Button -->
+      <div class="flex justify-between items-center pb-5 border-b border-white/10">
+        <a href="#hero" class="mobile-logo-link flex items-center">
+          <img src="/assets/images/mota-logo.png" alt="Mota Painting Services" class="h-10 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]" />
+        </a>
+        <button id="mobile-menu-close" class="text-white/80 hover:text-white p-2.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 transition-all duration-200" aria-label="Close menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
           </svg>
         </button>
       </div>
 
-      <nav class="flex flex-col gap-6 text-center my-auto py-6">
-        <a href="#hero" class="mobile-link text-[18px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Home</a>
-        <a href="#services" class="mobile-link text-[18px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Services</a>
-        <a href="#our-work" class="mobile-link text-[18px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Our Work</a>
-        <a href="#about" class="mobile-link text-[18px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">About</a>
-        <a href="#contact" class="mobile-link text-[18px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Contact</a>
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-6 text-center my-auto py-8">
+        <a href="#hero" class="mobile-link text-[19px] sm:text-[21px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Home</a>
+        <a href="#services" class="mobile-link text-[19px] sm:text-[21px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Services</a>
+        <a href="#our-work" class="mobile-link text-[19px] sm:text-[21px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Our Work</a>
+        <a href="#about" class="mobile-link text-[19px] sm:text-[21px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">About</a>
+        <a href="#contact" class="mobile-link text-[19px] sm:text-[21px] uppercase tracking-[0.14em] font-semibold text-white/95 hover:text-champagne transition-colors">Contact</a>
       </nav>
 
+      <!-- Bottom Action Area -->
       <div class="pt-6 border-t border-white/10 text-center">
         <a 
           href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%20Services%2C%20I%20would%20like%20to%20request%20a%20free%20estimate."
@@ -127,7 +133,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
           </svg>
         </a>
-        <p class="text-white/40 text-[11px] mt-4 tracking-wider">Serving All South & Central Florida</p>
+        <p class="text-white/45 text-[11px] mt-4 tracking-wider uppercase font-medium">Serving All South & Central Florida</p>
       </div>
     </div>
   </header>
@@ -527,6 +533,116 @@
         </a>
       </div>
 
+    </div>
+  </section>
+
+
+  <!-- ==================== 03. ABOUT US SECTION ==================== -->
+  <section id="about" class="about-section relative z-30 bg-[#f9f8f5] text-[#11161d] py-20 sm:py-28 lg:py-32 border-t border-[#e8e6e1] overflow-hidden font-manrope">
+    
+    <!-- Subtle architectural monogram watermark in bottom-right background -->
+    <div class="absolute -bottom-24 -right-24 w-96 h-96 opacity-[0.035] pointer-events-none select-none">
+      <img src="/assets/images/mota-logo.png" alt="" class="w-full h-full object-contain filter grayscale" />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-center">
+        
+        <!-- Left Column: Vertical Professional Painter Photograph (Full bleed card with 20px rounded corners) -->
+        <div class="lg:col-span-5 about-image-container">
+          <div class="relative w-full aspect-[3/4] sm:aspect-[4/5] lg:aspect-[3/4] max-h-[580px] rounded-[22px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] border border-[#eae7e0] bg-[#181f28] group">
+            <img 
+              src="/assets/images/about-painter.png" 
+              alt="Mota Painting Professional applying exterior finish" 
+              class="w-full h-full object-cover object-center transform duration-700 ease-out group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+            <!-- Discreet subtle inner shadow for architectural framing -->
+            <div class="absolute inset-0 rounded-[22px] ring-1 ring-inset ring-black/5 pointer-events-none"></div>
+          </div>
+        </div>
+
+        <!-- Right Column: Editorial Copy, Differentiators and Dark CTA Button -->
+        <div class="lg:col-span-7 about-content lg:pl-4 xl:pl-8 flex flex-col justify-center">
+          
+          <!-- Eyebrow with golden accent line -->
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-8 h-[2px] bg-[#dfa938] rounded-full"></span>
+            <span class="font-manrope text-[11px] sm:text-[12px] font-bold tracking-[0.22em] uppercase text-[#b88628]">
+              ABOUT MOTA PAINTING SERVICES
+            </span>
+          </div>
+
+          <!-- Headline -->
+          <h2 class="font-manrope font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] xl:text-[54px] leading-[1.1] text-[#11161d] tracking-[-0.035em] mb-5 sm:mb-6">
+            Built on Quality.<br />
+            Driven by <span class="text-[#dfa938]">Detail.</span>
+          </h2>
+
+          <!-- Description Paragraph -->
+          <p class="font-manrope text-[15px] sm:text-[16px] lg:text-[17px] text-[#555a64] font-normal leading-[1.65] max-w-xl mb-8 sm:mb-10">
+            At Mota Painting Services, we provide professional painting, caulking, and waterproofing solutions for residential and commercial properties across Florida, with careful attention to every project.
+          </p>
+
+          <!-- Differentiators Row: 3 items with circular golden check icons and subtle dividers -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-0 sm:divide-x sm:divide-[#e4e1d9] py-4 sm:py-5 mb-8 sm:mb-10 border-y border-[#e8e6e1]/80">
+            
+            <!-- Item 1: Quality Workmanship -->
+            <div class="flex items-center gap-3 sm:pr-4 lg:pr-5">
+              <div class="w-8 h-8 rounded-full border-2 border-[#dfa938] bg-transparent flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-[#dfa938]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <span class="font-manrope font-bold text-[14px] sm:text-[15px] text-[#11161d] tracking-[-0.01em] leading-snug">
+                Quality<br class="hidden sm:inline" /> Workmanship
+              </span>
+            </div>
+
+            <!-- Item 2: Professional Service -->
+            <div class="flex items-center gap-3 sm:px-4 lg:px-5">
+              <div class="w-8 h-8 rounded-full border-2 border-[#dfa938] bg-transparent flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-[#dfa938]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <span class="font-manrope font-bold text-[14px] sm:text-[15px] text-[#11161d] tracking-[-0.01em] leading-snug">
+                Professional<br class="hidden sm:inline" /> Service
+              </span>
+            </div>
+
+            <!-- Item 3: Attention to Detail -->
+            <div class="flex items-center gap-3 sm:pl-4 lg:pl-5">
+              <div class="w-8 h-8 rounded-full border-2 border-[#dfa938] bg-transparent flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-[#dfa938]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <span class="font-manrope font-bold text-[14px] sm:text-[15px] text-[#11161d] tracking-[-0.01em] leading-snug">
+                Attention<br class="hidden sm:inline" /> to Detail
+              </span>
+            </div>
+
+          </div>
+
+          <!-- CTA Button: Dark Graphite with White Text and Arrow (Discover Our Company →) -->
+          <div>
+            <a 
+              href="https://wa.me/19548560488?text=Hello%20Mota%20Painting%2C%20I%20would%20like%20to%20discover%20more%20about%20your%20company." 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="group inline-flex items-center justify-center gap-3 w-full sm:w-auto h-[50px] sm:h-[52px] px-8 rounded-xl sm:rounded-2xl bg-[#141a22] hover:bg-[#080c10] text-white font-manrope font-semibold text-[14px] tracking-[0.02em] shadow-[0_4px_20px_rgba(20,26,34,0.18)] hover:shadow-[0_8px_28px_rgba(20,26,34,0.3)] transition-all duration-300"
+            >
+              <span>Discover Our Company</span>
+              <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </section>
 

@@ -27,6 +27,7 @@ class MotaExperience {
     this.initMobileMenu();
     this.initHeroVideoScrubber();
     this.initServicesAnimations();
+    this.initAboutAnimations();
   }
 
   /**
@@ -274,6 +275,36 @@ class MotaExperience {
       stagger: 0.1,
       duration: 0.9,
       ease: 'power2.out'
+    });
+  }
+
+  /**
+   * About Section entrance animations (Smooth, refined fade-in without aggressive parallax)
+   */
+  initAboutAnimations() {
+    gsap.from('.about-image-container', {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      x: -30,
+      duration: 1.1,
+      ease: 'power3.out'
+    });
+
+    gsap.from('.about-content', {
+      scrollTrigger: {
+        trigger: '#about',
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+      },
+      opacity: 0,
+      y: 35,
+      duration: 1,
+      delay: 0.15,
+      ease: 'power3.out'
     });
   }
 }
