@@ -81,14 +81,14 @@ body {
 .btn-cta-gold {
   background: linear-gradient(135deg, #e5b342 0%, #d89f2e 100%);
   color: #11161d;
-  box-shadow: 0 4px 18px rgba(216, 159, 46, 0.32);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-cta-gold:hover {
   background: linear-gradient(135deg, #f0c359 0%, #dfa938 100%);
   color: #080c10;
-  box-shadow: 0 6px 24px rgba(216, 159, 46, 0.48);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
   transform: translateY(-1px);
 }
 
@@ -364,14 +364,20 @@ body {
   animation: wheelScroll 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
 }
 
-/* Mobile Menu Transitions & Architectural Glassmorphism */
+/* Mobile Menu Transitions & Architectural Glassmorphism (Solid dark frosted backdrop) */
 .mobile-drawer {
-  background: rgba(10, 14, 20, 0.88);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border-left: 1px solid rgba(212, 175, 55, 0.15);
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+  background: rgba(10, 14, 20, 0.96) !important;
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border-left: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@supports not (backdrop-filter: blur(32px)) {
+  .mobile-drawer {
+    background: #0a0e14 !important;
+  }
 }
 
 .mobile-drawer.active {
