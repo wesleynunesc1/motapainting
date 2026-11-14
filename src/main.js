@@ -8,16 +8,8 @@ gsap.registerPlugin(ScrollTrigger);
  */
 class MotaExperience {
   constructor() {
-    this.video = document.getElementById('hero-video');
     this.heroSection = document.getElementById('hero');
-    this.scrollIndicator = document.getElementById('hero-scroll-indicator');
-    this.progressBar = document.getElementById('transformation-progress-bar');
     this.header = document.getElementById('site-header');
-    
-    this.targetProgress = 0;
-    this.currentProgress = 0;
-    this.isRendering = false;
-    this.rafId = null;
 
     this.init();
   }
@@ -25,7 +17,7 @@ class MotaExperience {
   init() {
     this.initHeaderBehavior();
     this.initMobileMenu();
-    this.initHeroVideoScrubber();
+    this.initHeroEntrance();
     this.initServicesAnimations();
     this.initAboutAnimations();
     this.initPortfolio();
@@ -33,6 +25,27 @@ class MotaExperience {
     this.initFaqAccordion();
     this.initContactForm();
     this.initBackToTop();
+  }
+
+  /**
+   * Subtle editorial fade & elevation for Hero elements on load
+   */
+  initHeroEntrance() {
+    gsap.from('.hero-content-box > *', {
+      opacity: 0,
+      y: 24,
+      stagger: 0.12,
+      duration: 1,
+      ease: 'power3.out',
+      delay: 0.15
+    });
+
+    gsap.from('.hero-bg-image', {
+      scale: 1.05,
+      opacity: 0.85,
+      duration: 1.6,
+      ease: 'power2.out'
+    });
   }
 
   /**
@@ -146,124 +159,6 @@ class MotaExperience {
         closeMenu();
       }
     });
-  }
-
-  /**
-   * Scroll-Driven Video Scrubbing Engine
-   * Directly drives frame position with sub-frame precision and zero jitter.
-   * Starts precisely at frame 0.0s (worn house, paused initially).
-   * Scrub transforms facade until 100% finished renovation, with a brief hold before unpinning.
-   */
-  initHeroVideoScrubber() {
-    if (!this.video || !this.heroSection) return;
-
-    const startTime = 0.0; // Starts strictly at frame 0.0 (initial worn paint condition)
-
-    this.video.muted = true;
-    this.video.playsInline = true;
-    this.video.pause();
-
-    // Prime the video frame buffer at 0.0s to ensure mobile iOS & Android WebKit load frame 0
-    const primeVideo = () => {
-      this.video.currentTime = startTime;
-      this.video.pause();
-    };
-    primeVideo();
-
-    const setupScrubber = () => {
-      // Ensure video duration is ready
-      const totalDuration = this.video.duration || 6.04;
-      // End frame safe limit (stopping right at the finished renovated frame, avoiding EOF black glitches)
-      const endTime = Math.max(totalDuration - 0.08, 0.5);
-      const scrubRange = endTime - startTime;
-
-      // Force video to second 0.0 immediately on load
-      this.video.currentTime = startTime;
-      this.video.pause();
-
-      // Responsive scroll distance: ~220% on mobile for natural touch gesture, 350% on desktop
-      const isMobile = window.innerWidth <= 768;
-      const scrollDistance = isMobile ? '+=220%' : '+=350%';
-
-      // Master pinned ScrollTrigger
-      ScrollTrigger.create({
-        trigger: this.heroSection,
-        start: 'top top',
-        end: scrollDistance,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        scrub: isMobile ? 0.08 : 0.15, // Responsive touch & wheel tracking
-        onUpdate: (self) => {
-          this.targetProgress = self.progress;
-
-          // Update subtle progress bar
-          if (this.progressBar) {
-            this.progressBar.style.width = `${self.progress * 100}%`;
-          }
-
-          // Fade out scroll indicators quickly upon scroll start
-          const desktopInd = document.getElementById('hero-scroll-indicator');
-          const mobileInd = document.querySelector('.mobile-scroll-indicator');
-          [desktopInd, mobileInd].forEach(ind => {
-            if (ind) {
-              if (self.progress > 0.03) {
-                ind.style.opacity = '0';
-                ind.style.pointerEvents = 'none';
-              } else {
-                ind.style.opacity = ind === mobileInd ? '0.7' : '1';
-                ind.style.pointerEvents = 'auto';
-              }
-            }
-          });
-
-          // Start smooth interpolation render loop
-          if (!this.isRendering) {
-            this.isRendering = true;
-            this.renderScrub(startTime, scrubRange);
-          }
-        }
-      });
-    };
-
-    if (this.video.readyState >= 1) {
-      setupScrubber();
-    } else {
-      this.video.addEventListener('loadedmetadata', setupScrubber, { once: true });
-    }
-  }
-
-  /**
-   * Ultra-smooth physics-lerped frame synchronization loop
-   * Maps progress 0% -> 90% to full video transformation (startTime -> endTime).
-   * Progress 90% -> 100% holds the completed 100% renovated frame before releasing scroll to next section.
-   */
-  renderScrub(startTime, scrubRange) {
-    if (!this.video) return;
-
-    const delta = this.targetProgress - this.currentProgress;
-
-    if (Math.abs(delta) > 0.0008) {
-      // Smooth exponential approach towards target position
-      this.currentProgress += delta * 0.32;
-
-      // Video reaches 100% transformation at 90% scroll, holding the pristine final frame until 100% scroll
-      const normalizedVideoProgress = Math.min(Math.max(this.currentProgress / 0.90, 0), 1);
-      const targetTime = startTime + (normalizedVideoProgress * scrubRange);
-
-      if (!this.video.seeking) {
-        this.video.currentTime = targetTime;
-      }
-
-      this.rafId = requestAnimationFrame(() => this.renderScrub(startTime, scrubRange));
-    } else {
-      this.currentProgress = this.targetProgress;
-      const normalizedVideoProgress = Math.min(Math.max(this.currentProgress / 0.90, 0), 1);
-      const targetTime = startTime + (normalizedVideoProgress * scrubRange);
-      this.video.currentTime = targetTime;
-      this.isRendering = false;
-    }
   }
 
   /**
