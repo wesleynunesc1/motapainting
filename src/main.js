@@ -28,6 +28,11 @@ class MotaExperience {
     this.initHeroVideoScrubber();
     this.initServicesAnimations();
     this.initAboutAnimations();
+    this.initPortfolio();
+    this.initBeforeAfterSlider();
+    this.initFaqAccordion();
+    this.initContactForm();
+    this.initBackToTop();
   }
 
   /**
@@ -37,7 +42,7 @@ class MotaExperience {
    */
   initHeaderBehavior() {
     const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
-    const sections = ['hero', 'services', 'our-work', 'about', 'contact'];
+    const sections = ['hero', 'services', 'our-work', 'who-we-serve', 'about', 'why-us', 'process', 'reviews', 'areas', 'faq', 'contact'];
     const servicesSection = document.getElementById('services');
 
     const updateHeader = () => {
@@ -328,6 +333,202 @@ class MotaExperience {
       duration: 1,
       delay: 0.15,
       ease: 'power3.out'
+    });
+  }
+
+  /**
+   * 03. Portfolio Filter Tabs (Commercial, Condominium, Residential, All)
+   */
+  initPortfolio() {
+    const filterBtns = document.querySelectorAll('.portfolio-filter-btn');
+    const items = document.querySelectorAll('.portfolio-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.getAttribute('data-filter');
+
+        items.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            item.style.display = 'block';
+            setTimeout(() => {
+              item.style.opacity = '1';
+              item.style.transform = 'scale(1)';
+            }, 30);
+          } else {
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.97)';
+            setTimeout(() => {
+              item.style.display = 'none';
+            }, 250);
+          }
+        });
+      });
+    });
+  }
+
+  /**
+   * Interactive Before/After Comparison Drag Slider
+   */
+  initBeforeAfterSlider() {
+    const container = document.getElementById('before-after-container');
+    const beforeImage = document.getElementById('before-image-wrap');
+    const handle = document.getElementById('slider-handle');
+    if (!container || !beforeImage || !handle) return;
+
+    let isDragging = false;
+
+    const setPosition = (x) => {
+      const rect = container.getBoundingClientRect();
+      let percent = ((x - rect.left) / rect.width) * 100;
+      if (percent < 0) percent = 0;
+      if (percent > 100) percent = 100;
+
+      beforeImage.style.width = `${percent}%`;
+      handle.style.left = `${percent}%`;
+    };
+
+    const onMove = (e) => {
+      if (!isDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      setPosition(clientX);
+    };
+
+    const stopDragging = () => {
+      isDragging = false;
+    };
+
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      setPosition(e.clientX);
+    });
+
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      setPosition(e.touches[0].clientX);
+    }, { passive: true });
+
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: true });
+    window.addEventListener('mouseup', stopDragging);
+    window.addEventListener('touchend', stopDragging);
+  }
+
+  /**
+   * 10. FAQ Single-open Accordion
+   */
+  initFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems.length) return;
+
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      const content = item.querySelector('.faq-content');
+
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+
+        // Close all other items (single accordion policy)
+        faqItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+            const otherContent = otherItem.querySelector('.faq-content');
+            if (otherContent) otherContent.style.maxHeight = null;
+          }
+        });
+
+        // Toggle current item
+        if (isOpen) {
+          item.classList.remove('active');
+          content.style.maxHeight = null;
+        } else {
+          item.classList.add('active');
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  /**
+   * 11. Final Contact Estimate Form with Real Client-side Validation & Feedback
+   */
+  initContactForm() {
+    const form = document.getElementById('estimate-form');
+    const feedbackBox = document.getElementById('form-feedback-box');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = form.querySelector('[name="full_name"]')?.value.trim();
+      const email = form.querySelector('[name="email"]')?.value.trim();
+      const phone = form.querySelector('[name="phone"]')?.value.trim();
+      const propType = form.querySelector('[name="property_type"]')?.value;
+      const service = form.querySelector('[name="service"]')?.value;
+      const city = form.querySelector('[name="city"]')?.value.trim();
+      const details = form.querySelector('[name="details"]')?.value.trim();
+
+      // Basic client-side validation
+      if (!name || !email || !phone || !service) {
+        if (feedbackBox) {
+          feedbackBox.className = 'p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm mb-5';
+          feedbackBox.innerHTML = '<strong>Please complete all required fields</strong> (Full Name, Email, Phone, and Service Needed).';
+          feedbackBox.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        if (feedbackBox) {
+          feedbackBox.className = 'p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm mb-5';
+          feedbackBox.innerHTML = '<strong>Invalid Email Address.</strong> Please provide a valid email so we can reach you.';
+          feedbackBox.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // Format WhatsApp / Instant Direct Submission as actual working endpoint
+      const message = `*NEW PROJECT ESTIMATE REQUEST*\n\n` +
+        `*Name:* ${name}\n` +
+        `*Email:* ${email}\n` +
+        `*Phone:* ${phone}\n` +
+        `*Property Type:* ${propType || 'Not specified'}\n` +
+        `*Service Needed:* ${service}\n` +
+        `*City / Location:* ${city || 'Florida'}\n` +
+        `*Project Details:* ${details || 'None provided'}`;
+
+      const whatsappUrl = `https://wa.me/19548560488?text=${encodeURIComponent(message)}`;
+
+      if (feedbackBox) {
+        feedbackBox.className = 'p-4 rounded-xl bg-[#dfa938]/15 border border-[#dfa938]/40 text-[#f3e5ab] text-sm mb-5';
+        feedbackBox.innerHTML = '<strong>Estimate request generated successfully!</strong> Redirecting your project specifications to Mota Painting Services...';
+        feedbackBox.classList.remove('hidden');
+      }
+
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      }, 700);
+    });
+  }
+
+  /**
+   * Back to Top smooth scroll button
+   */
+  initBackToTop() {
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (!backToTopBtn) return;
+
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   }
 }
