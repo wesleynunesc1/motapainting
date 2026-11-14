@@ -150,42 +150,40 @@ class MotaExperience {
 
   /**
    * Scroll-Driven Video Scrubbing Engine
-   * Directly drives frame position with sub-frame precision and zero jitter
-   * Configured to start strictly from second 1.0 (startTime = 1.0)
+   * Directly drives frame position with sub-frame precision and zero jitter.
+   * Starts precisely at frame 0.0s (worn house, paused initially).
+   * Scrub transforms facade until 100% finished renovation, with a brief hold before unpinning.
    */
   initHeroVideoScrubber() {
     if (!this.video || !this.heroSection) return;
 
-    const startTime = 1.0; // Start playback at 1 second
+    const startTime = 0.0; // Starts strictly at frame 0.0 (initial worn paint condition)
 
     this.video.muted = true;
     this.video.playsInline = true;
-    
-    // Play briefly then pause at 1.0s to ensure mobile iOS / Android WebKit primes the frame buffer
+    this.video.pause();
+
+    // Prime the video frame buffer at 0.0s to ensure mobile iOS & Android WebKit load frame 0
     const primeVideo = () => {
       this.video.currentTime = startTime;
-      const playPromise = this.video.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          this.video.pause();
-          this.video.currentTime = startTime;
-        }).catch(() => {
-          this.video.currentTime = startTime;
-        });
-      }
+      this.video.pause();
     };
     primeVideo();
 
     const setupScrubber = () => {
-      const duration = this.video.duration || 6.04;
-      const scrubRange = Math.max(duration - startTime, 0.1);
+      // Ensure video duration is ready
+      const totalDuration = this.video.duration || 6.04;
+      // End frame safe limit (stopping right at the finished renovated frame, avoiding EOF black glitches)
+      const endTime = Math.max(totalDuration - 0.08, 0.5);
+      const scrubRange = endTime - startTime;
 
-      // Force video to second 1.0 immediately on load
+      // Force video to second 0.0 immediately on load
       this.video.currentTime = startTime;
+      this.video.pause();
 
-      // Responsive scroll pacing: ~200% on mobile for natural fingertip gesture, 350% on desktop
+      // Responsive scroll distance: ~220% on mobile for natural touch gesture, 350% on desktop
       const isMobile = window.innerWidth <= 768;
-      const scrollDistance = isMobile ? '+=200%' : '+=350%';
+      const scrollDistance = isMobile ? '+=220%' : '+=350%';
 
       // Master pinned ScrollTrigger
       ScrollTrigger.create({
@@ -196,7 +194,7 @@ class MotaExperience {
         pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        scrub: isMobile ? 0.08 : 0.15, // Ultra-responsive on mobile touch
+        scrub: isMobile ? 0.08 : 0.15, // Responsive touch & wheel tracking
         onUpdate: (self) => {
           this.targetProgress = self.progress;
 
@@ -238,7 +236,8 @@ class MotaExperience {
 
   /**
    * Ultra-smooth physics-lerped frame synchronization loop
-   * Interpolates from startTime (1.0s) to final frame
+   * Maps progress 0% -> 90% to full video transformation (startTime -> endTime).
+   * Progress 90% -> 100% holds the completed 100% renovated frame before releasing scroll to next section.
    */
   renderScrub(startTime, scrubRange) {
     if (!this.video) return;
@@ -247,8 +246,11 @@ class MotaExperience {
 
     if (Math.abs(delta) > 0.0008) {
       // Smooth exponential approach towards target position
-      this.currentProgress += delta * 0.28;
-      const targetTime = startTime + (this.currentProgress * scrubRange);
+      this.currentProgress += delta * 0.32;
+
+      // Video reaches 100% transformation at 90% scroll, holding the pristine final frame until 100% scroll
+      const normalizedVideoProgress = Math.min(Math.max(this.currentProgress / 0.90, 0), 1);
+      const targetTime = startTime + (normalizedVideoProgress * scrubRange);
 
       if (!this.video.seeking) {
         this.video.currentTime = targetTime;
@@ -257,7 +259,8 @@ class MotaExperience {
       this.rafId = requestAnimationFrame(() => this.renderScrub(startTime, scrubRange));
     } else {
       this.currentProgress = this.targetProgress;
-      const targetTime = startTime + (this.currentProgress * scrubRange);
+      const normalizedVideoProgress = Math.min(Math.max(this.currentProgress / 0.90, 0), 1);
+      const targetTime = startTime + (normalizedVideoProgress * scrubRange);
       this.video.currentTime = targetTime;
       this.isRendering = false;
     }
@@ -453,66 +456,106 @@ class MotaExperience {
   }
 
   /**
-   * 11. Final Contact Estimate Form with Real Client-side Validation & Feedback
+   * 11. Final Contact Estimate Form with Direct WhatsApp Integration
    */
   initContactForm() {
-    const form = document.getElementById('estimate-form');
-    const feedbackBox = document.getElementById('form-feedback-box');
+    const form = document.getElementById('contact-form');
+    const feedbackBox = document.getElementById('contact-feedback');
     if (!form) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const name = form.querySelector('[name="full_name"]')?.value.trim();
+      const name = form.querySelector('[name="name"]')?.value.trim();
       const email = form.querySelector('[name="email"]')?.value.trim();
       const phone = form.querySelector('[name="phone"]')?.value.trim();
+      const city = form.querySelector('[name="city"]')?.value.trim();
       const propType = form.querySelector('[name="property_type"]')?.value;
       const service = form.querySelector('[name="service"]')?.value;
-      const city = form.querySelector('[name="city"]')?.value.trim();
       const details = form.querySelector('[name="details"]')?.value.trim();
 
-      // Basic client-side validation
+      // Reset previous feedback
+      if (feedbackBox) {
+        feedbackBox.classList.add('hidden');
+        feedbackBox.innerHTML = '';
+      }
+
+      // 1. Client-side Validation: Required fields
       if (!name || !email || !phone || !service) {
         if (feedbackBox) {
-          feedbackBox.className = 'p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm mb-5';
-          feedbackBox.innerHTML = '<strong>Please complete all required fields</strong> (Full Name, Email, Phone, and Service Needed).';
+          feedbackBox.className = 'p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-200 text-sm mb-6 flex items-start gap-3';
+          feedbackBox.innerHTML = `
+            <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <div>
+              <p class="font-bold text-white text-[15px] mb-0.5">Missing Required Fields</p>
+              <p class="text-white/80">Please complete Full Name, Email, Phone Number, and Service Needed.</p>
+            </div>
+          `;
           feedbackBox.classList.remove('hidden');
         }
         return;
       }
 
-      // Email format validation
+      // 2. Client-side Validation: Valid email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         if (feedbackBox) {
-          feedbackBox.className = 'p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm mb-5';
-          feedbackBox.innerHTML = '<strong>Invalid Email Address.</strong> Please provide a valid email so we can reach you.';
+          feedbackBox.className = 'p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-200 text-sm mb-6 flex items-start gap-3';
+          feedbackBox.innerHTML = `
+            <svg class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <p class="font-bold text-white text-[15px] mb-0.5">Invalid Email Address</p>
+              <p class="text-white/80">Please enter a valid email address so we can contact you.</p>
+            </div>
+          `;
           feedbackBox.classList.remove('hidden');
         }
         return;
       }
 
-      // Format WhatsApp / Instant Direct Submission as actual working endpoint
-      const message = `*NEW PROJECT ESTIMATE REQUEST*\n\n` +
-        `*Name:* ${name}\n` +
-        `*Email:* ${email}\n` +
-        `*Phone:* ${phone}\n` +
-        `*Property Type:* ${propType || 'Not specified'}\n` +
-        `*Service Needed:* ${service}\n` +
-        `*City / Location:* ${city || 'Florida'}\n` +
-        `*Project Details:* ${details || 'None provided'}`;
+      // 3. Construct WhatsApp Pre-filled Message in American English
+      let message = `*NEW ESTIMATE REQUEST — MOTA PAINTING SERVICES*\n\n` +
+        `Hello! I'd like to request a free estimate for my project.\n\n` +
+        `*CUSTOMER INFORMATION*\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${phone}\n`;
 
-      const whatsappUrl = `https://wa.me/19548560488?text=${encodeURIComponent(message)}`;
-
-      if (feedbackBox) {
-        feedbackBox.className = 'p-4 rounded-xl bg-[#dfa938]/15 border border-[#dfa938]/40 text-[#f3e5ab] text-sm mb-5';
-        feedbackBox.innerHTML = '<strong>Estimate request generated successfully!</strong> Redirecting your project specifications to Mota Painting Services...';
-        feedbackBox.classList.remove('hidden');
+      if (city) {
+        message += `Location: ${city}\n`;
       }
 
-      setTimeout(() => {
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      }, 700);
+      message += `\n*PROJECT INFORMATION*\n\n`;
+
+      if (propType) {
+        message += `Property Type: ${propType}\n`;
+      }
+
+      message += `Service Needed: ${service}\n`;
+
+      if (details) {
+        message += `\n*PROJECT DETAILS*\n${details}\n`;
+      }
+
+      message += `\nThank you! I look forward to hearing from your team.`;
+
+      // Official WhatsApp Click-to-Chat URL
+      const whatsappUrl = `https://wa.me/19548560488?text=${encodeURIComponent(message)}`;
+
+      // 4. Subtle visual feedback on button
+      if (submitBtn) {
+        submitBtn.classList.add('scale-[0.98]');
+        setTimeout(() => submitBtn.classList.remove('scale-[0.98]'), 200);
+      }
+
+      // 5. Open WhatsApp in new tab / application without wiping form fields
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     });
   }
 
